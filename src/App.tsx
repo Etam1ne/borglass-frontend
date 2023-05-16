@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { Layout } from './components/Layout/Layout';
 import { Home } from './pages/Home';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { GlobalStyle } from './Global.style';
-import { Production } from './pages/Production';
+import { Products } from './pages/Products';
+import { Info } from './pages/Info';
+import { Constacts } from './pages/Contacts';
 
 const theme: DefaultTheme = {
   colors: {
@@ -21,7 +23,9 @@ export function App(): JSX.Element {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />}/>
-            <Route path='production' element={<Production />}/>
+            <Route path='products' element={<Products />}/>
+            <Route path='info' element={<Info />}/>
+            <Route path='contacts' element={<Constacts />}/>
           </Route>
         </Routes>
       </BrowserRouter>

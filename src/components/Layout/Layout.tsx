@@ -24,13 +24,13 @@ export function Layout(): JSX.Element {
               <Link to="/">Главная</Link>
             </li>
             <li>
-              <Link to="production">Продукция</Link>
+              <Link to="products">Продукция</Link>
             </li>
             <li>
-              <Link to="/">Производство</Link>
+              <Link to="info">Производство</Link>
             </li>
             <li>
-              <Link to="/">Контакты</Link>
+              <Link to="contacts">Контакты</Link>
             </li>
           </NavLinks>
 

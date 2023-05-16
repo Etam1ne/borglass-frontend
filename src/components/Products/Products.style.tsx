@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProductionMain = styled.main`
+export const ProductsMain = styled.main`
     width: min(1200px, 95vw);
     margin: 0 auto;
     padding-top: 80px;
