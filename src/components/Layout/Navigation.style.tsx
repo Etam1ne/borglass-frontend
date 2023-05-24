@@ -4,6 +4,7 @@ import close from "../../images/close.svg";
 
 export const Navigation = styled.nav`
     position: fixed;
+    top: 0;
     width: 100%;
     height: 60px;
     background-color: ${props => props.theme.colors.primaryLightblue};
@@ -33,26 +34,32 @@ export const LogoContainer = styled.div`
     }
 `
 
-export const NavLinks = styled.ul`
+interface NavLinksProps {
+    direction?: string;
+    side: string;
+}
+
+export const NavLinks = styled.ul<NavLinksProps>`
     padding: 0;
     margin: 0;
     display: flex;
     list-style: none;
     gap: 1rem;
+    flex-direction: ${props => props.direction ?? "unset"};
 
     @media screen and (max-width: 620px) {
         position: fixed;
-        inset: 0 0 0 50%;
+        inset: ${porps => porps.side === "right" ? "0 0 0 50%" : "0 50% 0 0"};
         padding: min(30vh, 10rem) 2rem;
         flex-direction: column;
         background-color: ${props => props.theme.colors.primaryLightblue};
-        transition: transform 0.5s ;
-        
+        transition: transform 0.5s;
+                
         &[data-visible=true] {
             transform: translateX(0%);
         }
         &[data-visible=false] {
-            transform: translateX(100%);
+            transform: translateX(${porps => porps.side === "right" ? "100%" : "-300%"});
         }
     }
 `

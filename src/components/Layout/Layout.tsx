@@ -5,7 +5,7 @@ import { Logo } from "../../images/Logo";
 
 export function Layout(): JSX.Element {
 
-  const [openedNav, setOpenedNav] = useState<boolean>(false)
+  const [openedNav, setOpenedNav] = useState<boolean>(false);
 
   return (
     <>
@@ -19,7 +19,10 @@ export function Layout(): JSX.Element {
             </LogoContainer>
           </Link>
 
-          <NavLinks data-visible={openedNav}>
+          <NavLinks 
+          data-visible={openedNav}
+          side="right"
+          >
             <li>
               <Link to="/">Главная</Link>
             </li>
