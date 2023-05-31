@@ -30,9 +30,6 @@ export function Layout(): JSX.Element {
               <Link to="products">Продукция</Link>
             </li>
             <li>
-              <Link to="info">Производство</Link>
-            </li>
-            <li>
               <Link to="contacts">Контакты</Link>
             </li>
           </NavLinks>

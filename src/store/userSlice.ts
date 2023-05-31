@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface UserSlice {
     email: string | undefined;
     username: string;
+    isAdmin: boolean;
 }
 
 const initialState: UserSlice = {
     email: undefined,
     username: "anonymous",
+    isAdmin: false,
 }
 
 const userSlice = createSlice({

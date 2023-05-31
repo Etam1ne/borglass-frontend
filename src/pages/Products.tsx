@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export function Products(): JSX.Element {
 
+    const [search, setSearch] = useState<string>("");
     const [brand, setBrand] = useState<string>("");
     const [model, setModel] = useState<string>("");
     const [year, setYear] = useState<number>(0);
@@ -19,15 +20,17 @@ export function Products(): JSX.Element {
         setFilteredProducts(products.filter(item => {
             if 
             (
+                item.productName.search(new RegExp(search, "i")) >= 0 &&
                 item.productName.search(new RegExp(model, "i")) >= 0 &&
                 item.productName.search(new RegExp(brand, "i")) >= 0 &&
+                item.productType.search(new RegExp(type, "i")) >= 0 &&
                 ((item.startYear <= year && year <= item.endYear) || year === 0)
             ) {
                 return true;
             };
             return false;
         }))
-    }, [products, brand, model, year, type])
+    }, [products, search, brand, model, year, type])
 
     return (
         <ProductsMain>
@@ -35,7 +38,7 @@ export function Products(): JSX.Element {
             <Filters>
                 <VerticalFlexbox>
                     <label htmlFor="fastSearch">Быстрый поиск:</label>
-                    <TextInput id="fastSearch" placeholder="Acura"/>
+                    <TextInput id="fastSearch" placeholder="Acura" onChange={e => setSearch(e.target.value)}/>
                 </VerticalFlexbox>
 
                 <VerticalFlexbox>

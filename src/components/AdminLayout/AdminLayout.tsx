@@ -1,12 +1,20 @@
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { LogoContainer, NavContainer, NavLinks, NavButton } from "../Layout/Navigation.style";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, Outlet } from "react-router-dom";
+import { LogoContainer, NavLinks, NavButton } from "../Layout/Navigation.style";
 import { AdminNavigation, AdminNavContainer } from "./AdminNavigation.style";
 import { Logo } from "../../images/Logo";
+import { useAppSelector } from "../../hooks/reduxHooks";
+
 
 export function AdminLayout(): JSX.Element {
+    const navigate = useNavigate();
 
     const [openedNav, setOpenedNav] = useState<boolean>(false);
+    const user = useAppSelector(state => state.user);
+
+    useEffect(() => {
+        if (user.email === undefined && !user.isAdmin) navigate("auth");
+    })
 
     return (
         <>
