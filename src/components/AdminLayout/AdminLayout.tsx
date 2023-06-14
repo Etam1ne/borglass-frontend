@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import { LogoContainer, NavLinks, NavButton } from "../Layout/Navigation.style";
-import { AdminNavigation, AdminNavContainer } from "./AdminNavigation.style";
+import { AdminNavigation, AdminNavContainer, AdminPageWrapper } from "./AdminLayout.style";
 import { Logo } from "../../images/Logo";
 import { useAppSelector } from "../../hooks/reduxHooks";
 
@@ -13,14 +13,15 @@ export function AdminLayout(): JSX.Element {
     const user = useAppSelector(state => state.user);
 
     useEffect(() => {
+        console.log(user.email, user.isAdmin);
         if (user.email === undefined && !user.isAdmin) navigate("auth");
     })
 
     return (
-        <>
+        <AdminPageWrapper>
             <AdminNavigation>
                 <AdminNavContainer>
-                    <Link to="/">
+                    <Link to="./">
                         <LogoContainer>
                         <Logo width={40} height={40}/>
                         <span>BORGLASS</span>
@@ -33,16 +34,10 @@ export function AdminLayout(): JSX.Element {
                     side="left"
                     >
                         <li>
-                        <Link to="/">Главная</Link>
+                            <Link to="./">Продукция</Link>
                         </li>
                         <li>
-                        <Link to="products">Продукция</Link>
-                        </li>
-                        <li>
-                        <Link to="info">Производство</Link>
-                        </li>
-                        <li>
-                        <Link to="contacts">Контакты</Link>
+                            <Link to="offers">Заявки</Link>
                         </li>
                     </NavLinks>
 
@@ -53,7 +48,9 @@ export function AdminLayout(): JSX.Element {
                 </AdminNavContainer>
             </AdminNavigation>
 
-            <Outlet />
-        </>
+            <main>
+                <Outlet />
+            </main>
+        </AdminPageWrapper>
     );
 }

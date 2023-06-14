@@ -1,4 +1,4 @@
-import { SectionData, SectionImage, SectionWrapper, SectionText } from "../components/Home/Home.style";
+import { SectionData, SectionImage, SectionWrapper, SectionText, SectionList } from "../components/Home/Home.style";
 import Home1 from "../images/Home1.jpg"
 import Home2 from "../images/Home2.jpg"
 import Home3 from "../images/Home3.jpg"
@@ -49,7 +49,7 @@ export function Home(): JSX.Element {
             </SectionWrapper>
             <SectionWrapper>
                 <SectionData>
-                    <ul>
+                    <SectionList>
                         <li>
                             Нацеленность на удовлетворенность требований и ожиданий потребителя
                         </li>
@@ -70,12 +70,7 @@ export function Home(): JSX.Element {
                         <li>
                             Завоевание новых рынков реализации автостекол
                         </li>
-                        <li>
-                            Автостекло нашего производства продается не только в России: налажены каналы 
-                            сбыта в странах ближнего и дальнего зарубежья. Только у представителей Фирмы Borglass в 
-                            регионах можно купить оригинальное автостекло г. Бор с торговой маркой Borglass.
-                        </li>
-                    </ul>
+                    </SectionList>
                 </SectionData>
                 <SectionImage src={Home3}></SectionImage>
             </SectionWrapper>

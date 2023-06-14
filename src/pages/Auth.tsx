@@ -1,6 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-//import { useAppSelector, useAppDispatch } from "../hooks/reduxHooks";
+import { AuthForm, AuthMain } from "../components/Auth/Auth.style";
+import { TextInput, ButtonInput } from "../components/Inputs.style";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../store/userSlice";
 
 interface AuthProps {
     isAdmin: boolean,
@@ -9,8 +13,9 @@ interface AuthProps {
 
 export function Auth({ isAdmin, isLogin }: AuthProps): JSX.Element {
 
-    // const user = useAppSelector(state => state.user);
-    // const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
 
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
@@ -21,8 +26,11 @@ export function Auth({ isAdmin, isLogin }: AuthProps): JSX.Element {
             username: username,
             email: email,
             password: password
-        }).then(response => {
-            console.log(response)
+        }).then(() => {
+            dispatch(setUser({
+                username: username,
+                email: email,
+            }))
         })
     }
 
@@ -30,25 +38,65 @@ export function Auth({ isAdmin, isLogin }: AuthProps): JSX.Element {
         axios.post("http://localhost:5000/signin", {
             username: username,
             email: email,
-            password: password
-        }).then(response => {
-            console.log(response)
+            password: password,
+        }).then(() => {
+            dispatch(setUser({
+                email: email,
+                username: username,
+            }))
         })
     }
 
+    function adminAuth() {
+        axios.post("http://localhost:5000/adminauth", {
+            email: email,
+            password: password,
+        }).then(() => {
+            dispatch(setUser({
+                email: email,
+                username: "admin",
+                isAdmin: true
+            }));
+            navigate("../admin");
+        });
+    }
+
     return (
-        <form
-        onSubmit={e => {
-            e.preventDefault()
-            isLogin ? signIn() : signUp()
-        }}
-        >
-            {!isLogin && <input type="text" onChange={e => setUsername(e.target.value)}/>}
-            <input type="email" 
-            onChange={e => setEmail(e.target.value)}/>
-            <input type="password" 
-            onChange={e => setPassword(e.target.value)}/>
-            <input type="submit" value={isLogin ? "Sign In" : "Sign Up"} />
-        </form>
+        <AuthMain>
+            <AuthForm
+            onSubmit={e => {
+                e.preventDefault()
+                isLogin 
+                ? 
+                isAdmin ? adminAuth() : signIn() 
+                : 
+                signUp()
+            }}
+            >
+                {!isLogin && 
+                <>
+                    <label htmlFor="username">Имя:</label>
+                    <TextInput 
+                    type="text" 
+                    id="username" 
+                    onChange={e => setUsername(e.target.value)}
+                    />
+                </>}
+
+                <label htmlFor="email">Почта:</label>
+                <TextInput 
+                type="email" 
+                id="email"
+                onChange={e => setEmail(e.target.value)}
+                />
+
+                <label htmlFor="password">Пароль:</label>
+                <TextInput 
+                type="password" 
+                id="password" 
+                onChange={e => setPassword(e.target.value)}/>
+                <ButtonInput type="submit" value={isLogin ? "Войти" : "Зарегистрироваться"} />
+            </AuthForm>
+        </AuthMain>
     )
 }

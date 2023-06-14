@@ -19,10 +19,12 @@ const userSlice = createSlice({
         setUser(state, action) {
             state.email = action.payload.email;
             state.username = action.payload.username;
+            state.isAdmin = action.payload.isAdmin;
         },
         unsetUser(state) {
             state.email = initialState.email;
             state.username = initialState.username;
+            state.isAdmin = initialState.isAdmin;
         }
     },
 });

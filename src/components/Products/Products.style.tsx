@@ -33,13 +33,20 @@ export const ProductsTable = styled.div`
 `
 
 interface ProductColumnItemProps {
-    flex: number;
+    flex?: number;
 }
 
 export const ProductColumnItem = styled.div<ProductColumnItemProps>`
-    flex: ${props => props.flex};
+    flex: ${props => props.flex ?? 1};
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+`
+
+export const ProductColumnButton = styled(ProductColumnItem)`
+    background-color: ${props => props.theme.colors.primaryGreen};
+    color: ${props => props.theme.colors.primaryLightblue};
+    padding: 5px;
+    border-radius: 5px;
 `

@@ -43,17 +43,17 @@ export function Products(): JSX.Element {
 
                 <VerticalFlexbox>
                     <label htmlFor="brand">Марка</label>
-                    <TextInput id="brand" placeholder="Acura" onChange={e => setBrand(e.target.value)}/>
+                    <TextInput id="brand" placeholder="Suzuki" onChange={e => setBrand(e.target.value)}/>
                     <label htmlFor="model">Модель</label>
-                    <TextInput id="model" placeholder="Acura" onChange={e => setModel(e.target.value)}/>
+                    <TextInput id="model" placeholder="SX4" onChange={e => setModel(e.target.value)}/>
                     <label htmlFor="year">Год выпуска</label>
-                    <TextInput id="year" placeholder="Acura" 
+                    <TextInput id="year" placeholder="2008" 
                     onChange={e => {
                         if (isNaN(+e.target.value)) return
                         setYear(+e.target.value)
                         }}/>
                     <label htmlFor="type">Тип стекла</label>
-                    <TextInput id="type" placeholder="Acura" onChange={e => setType(e.target.value)}/>
+                    <TextInput id="type" placeholder="Ветровое" onChange={e => setType(e.target.value)}/>
                 </VerticalFlexbox>
             </Filters>
 
@@ -64,6 +64,7 @@ export function Products(): JSX.Element {
                     <ProductColumnItem flex={1}>Артикул</ProductColumnItem>
                     <ProductColumnItem flex={1}>Тип</ProductColumnItem>
                     <ProductColumnItem flex={1}>Цена</ProductColumnItem>
+                    <ProductColumnItem flex={1}>Заказать</ProductColumnItem>
                 </HorizontalFlexbox>
 
                 {
@@ -80,6 +81,7 @@ export function Products(): JSX.Element {
                     productNumber={data.productNumber}
                     productType={data.productType}
                     price={data.price}
+                    additional="offer"
                     />
                 ))}
 

@@ -7,6 +7,7 @@ import { Products } from './pages/Products';
 import { Constacts } from './pages/Contacts';
 import { AdminProducts } from './pages/admin/AdminProducts';
 import { AdminLayout } from './components/AdminLayout/AdminLayout';
+import { Offers } from './pages/admin/Offers';
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { Auth } from './pages/Auth';
@@ -33,8 +34,10 @@ export function App(): JSX.Element {
             </Route>
             <Route path='admin' element={<AdminLayout />}>
               <Route index element={<AdminProducts />}/>
+              <Route path='offers' element={<Offers />}/>
             </Route>
-            <Route path='auth' element={<Auth isAdmin={false} isLogin={false}/>}/>
+            <Route path='signin' element={<Auth isAdmin={false} isLogin={true}/>}/>
+            <Route path='signup' element={<Auth isAdmin={false} isLogin={false}/>}/>
             <Route path='admin/auth' element={<Auth isAdmin={true} isLogin={true}/>}/>
           </Routes>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 import { HorizontalFlexbox } from "../Box.style";
-import { ProductColumnItem } from "./Products.style";
+import { ProductColumnButton, ProductColumnItem } from "./Products.style";
 
 export interface ProductCardProps {
     productName: string;
@@ -8,16 +8,29 @@ export interface ProductCardProps {
     productNumber: string;
     productType: string;
     price: number;
+    additional?: string;
+}
+
+function renderAdditional(type: string | undefined): JSX.Element {
+    switch (type) {
+        case "edit":
+            return <ProductColumnButton>edit</ProductColumnButton>
+        case "offer":
+            return <ProductColumnButton>Купить</ProductColumnButton>
+        default:
+            return <></>
+    }
 }
 
 export function ProductCard(props: ProductCardProps): JSX.Element {
     return (
         <HorizontalFlexbox>
             <ProductColumnItem flex={2}>{props.productName}</ProductColumnItem>
-            <ProductColumnItem flex={1}>{props.startYear} - {props.endYear}</ProductColumnItem>
-            <ProductColumnItem flex={1}>{props.productNumber}</ProductColumnItem>
-            <ProductColumnItem flex={1}>{props.productType}</ProductColumnItem>
-            <ProductColumnItem flex={1}>{props.price}</ProductColumnItem>
+            <ProductColumnItem>{props.startYear} - {props.endYear}</ProductColumnItem>
+            <ProductColumnItem>{props.productNumber}</ProductColumnItem>
+            <ProductColumnItem>{props.productType}</ProductColumnItem>
+            <ProductColumnItem>{props.price}</ProductColumnItem>
+            {renderAdditional(props.additional)}
         </HorizontalFlexbox>
     );
 }

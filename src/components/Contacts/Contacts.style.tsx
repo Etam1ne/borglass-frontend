@@ -19,9 +19,17 @@ export const ContactsWrapper = styled.div`
     & ul {
         padding: 30px;
     }
+    
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+    }
 `
 
 export const Map = styled.iframe`
     height: 50vh;
     width: 50vw;
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+        width: 100%;
+    }
 `
